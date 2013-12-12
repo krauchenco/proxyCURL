@@ -1,0 +1,15 @@
+{
+  "name": "proxyCURL",
+  "version": "0.0.0",
+  "description": "Proxy with show in console curl bash command line to make request like done in browser",
+  "main": "server.js",
+  "dependencies": {
+    "http-proxy": "~0.10.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "João Krauchenco Neto",
+  "license": "BSD-2-Clause"
+}
