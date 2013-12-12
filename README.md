@@ -15,7 +15,8 @@ npm install
 node server.js
 ```
 <br>
-Access Firefox and makhttps://raw.github.com/krauchenco/proxyCURL/master/etc/requestFirefox.png)
+Access Firefox and make a request:<br>
+![request in firefox](https://raw.github.com/krauchenco/proxyCURL/master/etc/requestFirefox.png)
 
 See the console log headers and curl commands generated:<br>
 ![request in firefox](https://raw.github.com/krauchenco/proxyCURL/master/etc/bashConsole.png)
