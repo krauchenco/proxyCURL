@@ -24,7 +24,7 @@ function logError(e) {
 	console.warn('*** ' + e);
 }
 
-var regularProxy = new httpProxy.RoutingProxy();
+var regularProxy = new httpProxy.createProxyServer();
 
 app.configure(function() {
   // app.use(express.static('public'));
@@ -48,11 +48,15 @@ app.get('*', function (req, res, next){
   var i2 = curl.indexOf("'", i1+1);
   console.log(curl.substr(0, i1+1)+uri.href+curl.substr(i2, curl.length-i2));
   console.log('---------------------------');
+  console.log('--->', uri.protocol+'//' + uri.hostname + ':'+(uri.port || 80));
   if (uri.hostname) {
-    regularProxy.proxyRequest(req, res, {
-      host: uri.hostname,
-      port: uri.port || 80
+    regularProxy.web(req, res, {
+      target: uri.protocol+'//' + uri.hostname + ':'+(uri.port || 80)
     });
+    // regularProxy.web(req, res, {
+    //       target: 'http://localhost:8000'
+    //     });
+    // regularProxy.web(req, res);
   } else {
     next();
   }
@@ -68,4 +72,14 @@ app.listen(8000).on('connect', function(req, socket, head) {
     conn.pipe(socket);
   });
 });
+
+regularProxy.on('error', function (err, req, res) {
+  console.log(err);
+});
+
+// http.createServer(function (req, res) {
+//   // res.writeHead(200, { 'Content-Type': 'text/plain' });
+//   // res.write('request successfully proxied to: ' + req.url + '\n' + JSON.stringify(req.headers, true, 2));
+//   // res.end();
+// }).listen(8000);
 console.log("proxy in 8000");
